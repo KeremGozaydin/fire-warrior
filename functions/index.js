@@ -58,7 +58,7 @@ https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@${top3[2].longitude},${top3[2
   return tweet
 }
 
-exports.tweet = onSchedule('0 */4 * *', async () => {
+exports.tweet = onSchedule('0 */4 * * *', async () => {
   let fires = await getFires()
   if (fires.length == 0) return
   let tweet = generateTweet(fires)

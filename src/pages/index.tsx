@@ -1,4 +1,5 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -23,12 +24,20 @@ export default function Home() {
             </CardContent>
           </Card>
           <Typography sx={{fontSize: '1.5em', textAlign: 'center'}}>
-          Hakkında:
+          <span style={{fontSize: '2em', fontWeight: 'lighter'}}>Hakkımızda</span>
           <br/>
           <br/>
           Fire Spotter, teknolojinin ve kamuya açık verilerin yenilikçi kullanımı yoluyla yerel toplulukların yangınları raporlaması ve izlemesini sağlayan, mevcut veri dağıtımının iyileştirilmesine olanak tanıyıp aynı zamanda toplumu da bilinçlendirerek yangın hasarlarının minimuma indirilmesini ve doğal kaynakların korunmasına yönelik çözümler geliştirmeyi amaçlayan bir araçtır.
           </Typography>
         </Box>
+
+        <Card>
+          <Typography variant="h2" sx={{textAlign: 'center', paddingY: '0.5em'}}>Bilinçlendirme Broşürümüz!</Typography>
+          <Box sx={{width: '100%', display: 'flex', flexFlow: 'row nowrap', justifyContent: 'center', alignItems: 'center', paddingBottom: '1em'}}>
+            <img style={{maxHeight: '500px'}} alt='brosur1' src="/bros1.jpeg" />
+            <img style={{maxHeight: '500px'}} alt='brosur2' src="/bros2.jpeg" />
+          </Box>
+        </Card>
       </main>
     </>
   )
