@@ -33,9 +33,9 @@ export default function App({ Component, pageProps }: AppProps) {
         {
         router.pathname === '/' 
         ? 
-          <Link href='harita'>Harita</Link>
+          <Link href='/fire-warrior/harita'>Harita</Link>
         : 
-          <Link href='/'>Anasayfa</Link>
+          <Link href='/fire-warrior'>Anasayfa</Link>
         }
       </AppBar>
       <Box sx={{height: '100%'}}>
