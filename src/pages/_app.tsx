@@ -25,17 +25,21 @@ export default function App({ Component, pageProps }: AppProps) {
   <>
     <ThemeProvider theme={theme}>
 
-    <Box sx={{display: "flex", flexFlow: 'column nowrap', gap: '2em', padding: '1em', height: '100vh'}}>
-      <AppBar sx={{display: 'flex', flexFlow: 'row nowrap', justifyContent: 'space-between'}} position="static">
+    <Box sx={{display: "flex", flexFlow: 'column nowrap', gap: '2em', padding: '1em', height: '100vh',}}>
+      <AppBar sx={{display: 'flex', flexFlow: 'row nowrap', justifyContent: 'space-between', paddingX: '2em', alignItems: 'center'}} position="static">
         <Toolbar>
           <Typography variant="h4">Fire Spotter</Typography>
         </Toolbar>
         {
         router.pathname === '/' 
         ? 
-          <Link href='/fire-warrior/harita'>Harita</Link>
+          <Typography variant='h4'>
+            <Link href='harita' style={{color: 'black', textDecoration: 'none'}}>Harita</Link>
+          </Typography>
         : 
-          <Link href='/fire-warrior'>Anasayfa</Link>
+          <Typography variant='h4'>
+            <Link href='/' style={{color: 'black', textDecoration: 'none'}}>Anasayfa</Link>
+          </Typography>
         }
       </AppBar>
       <Box sx={{height: '100%'}}>
