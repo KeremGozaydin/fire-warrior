@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { Wrapper } from '@googlemaps/react-wrapper';
-import { Box, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Select, Typography, Button } from '@mui/material';
 import csv from 'csvtojson';
 import { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -41,7 +41,7 @@ let mapOptions = {
 }
 
 
-const MyMap = ({fires}) => {
+const MyMap = ({fires, center}) => {
     const [myMap, setMyMap] = useState<any>()
     const ref = useRef(null);
 
@@ -49,15 +49,21 @@ const MyMap = ({fires}) => {
         setMyMap(new window.google.maps.Map(ref.current, mapOptions))
     }, [])
 
+    useEffect(() => {
+        if (myMap) {
+            myMap.setCenter(center)
+        }
+    },[center])
+
     return (
         <>
             <div ref={ref} style={{height: '80vh', width: '100%'}}  />
-            {myMap && <Fires map={myMap} fires={fires}/>}
+            {myMap && <Fires map={myMap} fires={fires} center={center}/>}
         </>
     )
 }
 
-const Fires = ({map, fires} : any) => {
+const Fires = ({map, fires, center} : any) => {
     return (
         <>
             {fires.map((fire, i) => (
@@ -67,6 +73,11 @@ const Fires = ({map, fires} : any) => {
                     </div>
                 </Marker>
             ))}
+            <Marker map={map} position={center}>
+                <div>
+                    <Icon style={{width: '30px', height: '30px'}} icon="mdi:map-marker-account" color="blue" />
+                </div>
+            </Marker>
         </>
     )
 }
@@ -101,14 +112,24 @@ const Marker = ({map, children, position}) => {
 export default function Harita() {
     let [radius, setRadius] = useState(100);
     let [center, setCenter] = useState({ lat: 41.015137, lng: 28.979530 });
-    let [user, setUser] = useState();
+    let [geoPerm, setGeoPerm] = useState(false);
     let [allResults, setAllResults] = useState([] as any[]);
     let [filtered, setFiltered] = useState([] as any[]);
 
+    let getPerm = () => {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            setCenter({lat: pos.coords.latitude, lng: pos.coords.longitude})
+            setGeoPerm(true)
+        }, (err) => {
+            console.log(err)
+            setGeoPerm(false)
+        })
+    }
 
     useEffect(() => {
         getFires().then((res: any) => {
             setAllResults(res)
+            getPerm()
         })
     },[])
 
@@ -125,34 +146,43 @@ export default function Harita() {
 
     return (
         <Box sx={{ height: '100%',display: 'flex', flexFlow: 'column nowrap', alignItems: 'center', justifyContent: 'center', gap: '1em',}}>
-            <Box sx={{display: 'flex', flexFlow: 'row nowrap', alignItems: 'center', gap: '2em'}}>
-                <FormControl sx={{color: 'main'}}>
-                    <InputLabel id="radius-select-label">Mesafe</InputLabel>
-                    <Select
-                        value={radius}
-                        onChange={(e) => {
-                            let value = e.target.value as number
-                            setRadius(value)
-                        }}
-                        labelId="radius-select-label"
-                        id="radius-select"
-                        label="Mesafe"
-                        color={'success'}
-                    >
-                        <MenuItem value={10}>10km</MenuItem>
-                        <MenuItem value={100}>200km</MenuItem>
-                        <MenuItem value={250}>300km</MenuItem>
-                        <MenuItem value={2500}>Full</MenuItem>
-                    </Select>
-                </FormControl>
-                <Typography>{filtered.length == 0 ? 'Yangın bulunamadı. Filtreleri değiştirmeyi dene!' : `${filtered.length} tane yangın bulundu!`}</Typography>
+            <Box sx={{display: 'flex', flexFlow: 'column nowrap', alignItems: 'center', justifyContent: 'center', gap: '1em'}}>
+                <Box sx={{display: 'flex', flexFlow: 'row nowrap', alignItems: 'center', gap: '2em'}}>
+                    <FormControl sx={{color: 'main'}}>
+                        <InputLabel id="radius-select-label">Mesafe</InputLabel>
+                        <Select
+                            value={radius}
+                            onChange={(e) => {
+                                let value = e.target.value as number
+                                setRadius(value)
+                            }}
+                            labelId="radius-select-label"
+                            id="radius-select"
+                            label="Mesafe"
+                            color={'success'}
+                        >
+                            <MenuItem value={10}>10km</MenuItem>
+                            <MenuItem value={100}>200km</MenuItem>
+                            <MenuItem value={250}>300km</MenuItem>
+                            <MenuItem value={2500}>Full</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <Typography>{filtered.length == 0 ? 'Yangın bulunamadı. Filtreleri değiştirmeyi dene!' : `${filtered.length} tane yangın bulundu!`}</Typography>
+                </Box>
+                {
+                geoPerm 
+                ? 
+                <Typography sx={{fontStyle: 'italic'}}>Geçerli konumunuz: {center.lat}, {center.lng}</Typography>
+                : 
+                <Typography sx={{fontStyle: 'italic'}}>Konumunuz alınamadı. Lütfen konum iznini ayarlardan açın.</Typography>
+                }
             </Box>
             <Wrapper
                 apiKey={mapKey}
                 version='beta'
                 libraries={['marker']}
             >
-                <MyMap fires={filtered}/>
+                <MyMap fires={filtered} center={center}/>
             </Wrapper>
         </Box>
     )
