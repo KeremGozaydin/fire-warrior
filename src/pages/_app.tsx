@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@emotion/react'
 import type { AppProps } from 'next/app'
-import { Box, AppBar, Toolbar, Typography, Button, createTheme } from '@mui/material'
+import { Box, AppBar, Toolbar, Typography, Button, createTheme, Link } from '@mui/material'
 import { useRouter } from 'next/router'
 import '@/styles/globals.css'
 
@@ -33,23 +33,9 @@ export default function App({ Component, pageProps }: AppProps) {
         {
         router.pathname === '/' 
         ? 
-          <Button 
-            onClick={() => router.push('harita')} 
-            color="secondary" 
-            variant='contained' 
-            sx={{fontWeight: 600, paddingX: '3em', fontSize: '1.25em'}}
-          >
-            Harita
-          </Button> 
+          <Link href='harita'>Harita</Link>
         : 
-          <Button 
-            onClick={() => router.push('/')} 
-            color="secondary" 
-            variant='contained' 
-            sx={{fontWeight: 600, paddingX: '3em', fontSize: '1.25em'}}
-          >
-            Anasayfa
-          </Button> 
+          <Link href='/'>Anasayfa</Link>
         }
       </AppBar>
       <Box sx={{height: '100%'}}>
