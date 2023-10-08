@@ -1,0 +1,103 @@
+[debug] [2023-10-08T18:10:35.215Z] ----------------------------------------------------------------------
+[debug] [2023-10-08T18:10:35.216Z] Command:       /opt/homebrew/Cellar/node/20.3.1_1/bin/node /opt/homebrew/bin/firebase deploy
+[debug] [2023-10-08T18:10:35.216Z] CLI Version:   12.4.8
+[debug] [2023-10-08T18:10:35.216Z] Platform:      darwin
+[debug] [2023-10-08T18:10:35.216Z] Node Version:  v20.3.1
+[debug] [2023-10-08T18:10:35.216Z] Time:          Sun Oct 08 2023 21:10:35 GMT+0300 (GMT+03:00)
+[debug] [2023-10-08T18:10:35.216Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-10-08T18:10:35.217Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-10-08T18:10:35.261Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-10-08T18:10:35.261Z] > authorizing via signed-in user (gozaydinkerem9@gmail.com)
+[debug] [2023-10-08T18:10:35.261Z] [iam] checking project fire-warrior-c0ce3 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2023-10-08T18:10:35.262Z] > refreshing access token with scopes: []
+[debug] [2023-10-08T18:10:35.262Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-10-08T18:10:35.262Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-10-08T18:10:35.585Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-10-08T18:10:35.585Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-10-08T18:10:35.594Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/fire-warrior-c0ce3:testIamPermissions [none]
+[debug] [2023-10-08T18:10:35.594Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/fire-warrior-c0ce3:testIamPermissions x-goog-quota-user=projects/fire-warrior-c0ce3
+[debug] [2023-10-08T18:10:35.594Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/fire-warrior-c0ce3:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2023-10-08T18:10:35.810Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-10-08T18:10:35.810Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2023-10-08T18:10:36.840Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/fire-warrior-c0ce3:testIamPermissions 200
+[debug] [2023-10-08T18:10:36.840Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/fire-warrior-c0ce3:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2023-10-08T18:10:36.841Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/fire-warrior-c0ce3/serviceAccounts/fire-warrior-c0ce3@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2023-10-08T18:10:36.842Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/fire-warrior-c0ce3/serviceAccounts/fire-warrior-c0ce3@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2023-10-08T18:10:37.889Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/fire-warrior-c0ce3/serviceAccounts/fire-warrior-c0ce3@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2023-10-08T18:10:37.890Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/fire-warrior-c0ce3/serviceAccounts/fire-warrior-c0ce3@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'fire-warrior-c0ce3'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script. 
+[debug] [2023-10-08T18:10:39.114Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fire-warrior-c0ce3 [none]
+[debug] [2023-10-08T18:10:39.697Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fire-warrior-c0ce3 200
+[debug] [2023-10-08T18:10:39.698Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fire-warrior-c0ce3 {"projectId":"fire-warrior-c0ce3","projectNumber":"741389921522","displayName":"fire-warrior","name":"projects/fire-warrior-c0ce3","resources":{"hostingSite":"fire-warrior-c0ce3"},"state":"ACTIVE","etag":"1_f947f159-579e-46d5-b1aa-a0880ab4df63"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2023-10-08T18:10:39.700Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-10-08T18:10:39.700Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/fire-warrior-c0ce3
+[debug] [2023-10-08T18:10:39.701Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/runtimeconfig.googleapis.com [none]
+[debug] [2023-10-08T18:10:39.701Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/fire-warrior-c0ce3
+[debug] [2023-10-08T18:10:39.702Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/cloudbuild.googleapis.com [none]
+[debug] [2023-10-08T18:10:39.702Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/cloudbuild.googleapis.com x-goog-quota-user=projects/fire-warrior-c0ce3
+[debug] [2023-10-08T18:10:39.703Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/artifactregistry.googleapis.com [none]
+[debug] [2023-10-08T18:10:39.703Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/artifactregistry.googleapis.com x-goog-quota-user=projects/fire-warrior-c0ce3
+[debug] [2023-10-08T18:10:41.024Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/runtimeconfig.googleapis.com 200
+[debug] [2023-10-08T18:10:41.024Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2023-10-08T18:10:41.026Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/cloudbuild.googleapis.com 200
+[debug] [2023-10-08T18:10:41.026Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/cloudbuild.googleapis.com [omitted]
+[info] ✔  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2023-10-08T18:10:41.029Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/cloudfunctions.googleapis.com 200
+[debug] [2023-10-08T18:10:41.029Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/cloudfunctions.googleapis.com [omitted]
+[info] ✔  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2023-10-08T18:10:41.123Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/artifactregistry.googleapis.com 200
+[debug] [2023-10-08T18:10:41.123Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/fire-warrior-c0ce3/services/artifactregistry.googleapis.com [omitted]
+[info] ✔  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2023-10-08T18:10:41.124Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fire-warrior-c0ce3/adminSdkConfig [none]
+[debug] [2023-10-08T18:10:41.387Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fire-warrior-c0ce3/adminSdkConfig 200
+[debug] [2023-10-08T18:10:41.388Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fire-warrior-c0ce3/adminSdkConfig {"projectId":"fire-warrior-c0ce3","storageBucket":"fire-warrior-c0ce3.appspot.com"}
+[debug] [2023-10-08T18:10:41.389Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/fire-warrior-c0ce3/configs [none]
+[debug] [2023-10-08T18:10:41.891Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/fire-warrior-c0ce3/configs 200
+[debug] [2023-10-08T18:10:41.891Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/fire-warrior-c0ce3/configs {}
+[debug] [2023-10-08T18:10:41.894Z] Validating nodejs source
+[debug] [2023-10-08T18:10:43.140Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "csvtojson": "^2.0.10",
+    "dotenv": "^16.3.1",
+    "firebase-admin": "^11.8.0",
+    "firebase-functions": "^4.3.1",
+    "twitter-api-v2": "^1.15.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2023-10-08T18:10:43.140Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2023-10-08T18:10:43.141Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-10-08T18:10:43.147Z] Found firebase-functions binary at '/Users/keremgozaydin/Desktop/hobi/fire-warrior/functions/node_modules/.bin/firebase-functions'
+[info] Serving at port 8356
+
+[debug] [2023-10-08T18:10:43.309Z] Got response from /__/functions.yaml {"endpoints":{"tweet":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"scheduleTrigger":{"schedule":"0 */4 * * *","retryConfig":{"retryCount":null,"maxDoublings":null,"maxRetrySeconds":null,"minBackoffSeconds":null,"maxBackoffSeconds":null},"timeZone":null},"entryPoint":"tweet"}},"specVersion":"v1alpha1","requiredAPIs":[{"api":"cloudscheduler.googleapis.com","reason":"Needed for scheduled functions."}]}

@@ -149,7 +149,7 @@ export default function Harita() {
             <Box sx={{display: 'flex', flexFlow: 'column nowrap', alignItems: 'center', justifyContent: 'center', gap: '1em'}}>
                 <Box sx={{display: 'flex', flexFlow: 'row nowrap', alignItems: 'center', gap: '2em'}}>
                     <FormControl sx={{color: 'main'}}>
-                        <InputLabel id="radius-select-label">Mesafe</InputLabel>
+                        <InputLabel id="radius-select-label">Distance</InputLabel>
                         <Select
                             value={radius}
                             onChange={(e) => {
@@ -158,7 +158,7 @@ export default function Harita() {
                             }}
                             labelId="radius-select-label"
                             id="radius-select"
-                            label="Mesafe"
+                            label="Distance"
                             color={'success'}
                         >
                             <MenuItem value={10}>10km</MenuItem>
@@ -167,14 +167,14 @@ export default function Harita() {
                             <MenuItem value={2500}>Full</MenuItem>
                         </Select>
                     </FormControl>
-                    <Typography>{filtered.length == 0 ? 'Yangın bulunamadı. Filtreleri değiştirmeyi dene!' : `${filtered.length} tane yangın bulundu!`}</Typography>
+                    <Typography>{filtered.length == 0 ? 'Couldn\'t find any wildfires near you. Try changing the distance!' : `Found ${filtered.length} wildfires!`}</Typography>
                 </Box>
                 {
                 geoPerm 
                 ? 
-                <Typography sx={{fontStyle: 'italic'}}>Geçerli konumunuz: {center.lat}, {center.lng}</Typography>
+                <Typography sx={{fontStyle: 'italic'}}>Your current location: {center.lat}, {center.lng}</Typography>
                 : 
-                <Typography sx={{fontStyle: 'italic'}}>Konumunuz alınamadı. Lütfen konum iznini ayarlardan açın.</Typography>
+                <Typography sx={{fontStyle: 'italic'}}>Couldn't access your location. Please enable navigation and refresh the page.</Typography>
                 }
             </Box>
             <Wrapper

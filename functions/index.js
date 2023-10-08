@@ -46,8 +46,8 @@ let generateTweet = (fires) => {
     fire.longitude = parseFloat(fire.longitude).toFixed(2)
   })
   let tweet = 
-  `Son 4 saat içinde ${fires.length} yangın tespit edildi!
-Son 4 saatteki en büyük 3 yangın:
+  `In the last 4 hours, ${fires.length} wildfires have been detected!
+The top 3 biggest possible wildfires are:
 1. ${top3[0].latitude}N ${top3[0].longitude}E ${top3[0].scan}km x ${top3[0].track}km
 https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@${top3[0].longitude},${top3[0].latitude},12.2z
 2. ${top3[1].latitude}N ${top3[1].longitude}E ${top3[1].scan}km x ${top3[1].track}km

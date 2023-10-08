@@ -34,11 +34,11 @@ export default function App({ Component, pageProps }: AppProps) {
         router.pathname === '/' 
         ? 
           <Typography variant='h4'>
-            <Link id='link' href='harita' style={{color: 'black', textDecoration: 'none'}}>Harita</Link>
+            <Link id='link' href='harita' style={{color: 'black', textDecoration: 'none'}}>Map</Link>
           </Typography>
         : 
           <Typography variant='h4'>
-            <Link id='link' href='/' style={{color: 'black', textDecoration: 'none'}}>Anasayfa</Link>
+            <Link id='link' href='/' style={{color: 'black', textDecoration: 'none'}}>Home</Link>
           </Typography>
         }
       </AppBar>
