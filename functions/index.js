@@ -70,16 +70,3 @@ exports.tweet = onSchedule('0 */4 * *', async () => {
     console.log(error)
   }
 })
-
-let fun = async () => {
-  let fires = await getFires()
-  if (fires.length == 0) return
-  let tweet = generateTweet(fires)
-  if (!tweet) return
-  try {
-    await client.v2.tweet(tweet)
-    console.log('Tweeted!')
-  } catch (error) {
-    console.log(error)
-  }
-}
