@@ -1,22 +1,16 @@
 const csv = require('csvtojson');
 const { onSchedule } = require('firebase-functions/v2/scheduler');
 const {TwitterApi} = require('twitter-api-v2');
+require('dotenv').config();
 
-const apiKey = 'kYqSlaniAnozmxXXuVjIBGt3n'
-const apiSecret = '2kYlwsgilsLtLMpB0XB290BcUCA9pIKazE99AmKLHVBsNvCg4Y'
-
-const clientId = 'eGRzdTJQa2c0ZmJCRGpieHdBeTE6MTpjaQ'
-const clientSecret = '0FK2U4S-4XKn5S09aJL7BvW5ivKHX-PfHqegm09v6kSGFuu1X6'
-const accessToken = '1710687260415299584-BppQ28yWHhOkAonQLI1ve02drPyCVB'
-const accessSecret = 'AiqDXyUd4yVW65MfLjmMWE2AP5yCALIdQ5Z6broXr9YmU'
 
 let client = new TwitterApi({
-  appKey: apiKey,
-  appSecret: apiSecret,
-  accessToken,
-  accessSecret: accessSecret,
-  clientKey: clientId,
-  clientSecret: clientSecret
+  appKey: process.env.TWITTER_API_KEY,
+  appSecret: process.env.TWITTER_API_SECRET,
+  accessToken: process.env.TWITTER_ACCESS_TOKEN,
+  accessSecret: process.env.TWITTER_ACCESS_SECRET,
+  clientKey: process.env.TWITTER_CLIENT_KEY,
+  clientSecret: process.env.TWITTER_CLIENT_SECRET
 })
 
 const getAvailableHours = (hour) => {
@@ -43,7 +37,7 @@ const getFires = async () => {
 }
 
 let generateTweet = (fires) => {
-  if (fires.length == 0) return console.log('No fires detected')
+  if (fires.length == 0) return
   let top3 = fires.sort((a,b) => parseFloat(b.scan)*parseFloat(b.track) - parseFloat(a.scan)*parseFloat(a.track)).slice(0,3)
   top3.map(fire => {
     fire.scan = (parseFloat(fire.scan)*0.375).toFixed(2)
@@ -61,17 +55,27 @@ https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@${top3[1].longitude},${top3[1
 3. ${top3[2].latitude}N ${top3[2].longitude}E ${top3[2].scan}km x ${top3[2].track}km
 https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@${top3[2].longitude},${top3[2].latitude},12.2z
 `
+  return tweet
 }
 
 exports.tweet = onSchedule('0 */4 * *', async () => {
   let fires = await getFires()
   if (fires.length == 0) return
-  let tweet = `🔥 ${fires.length} yangın tespit edildi!`
-  await client.v2.tweet(tweet)
+  let tweet = generateTweet(fires)
+  if (!tweet) return
+  try {
+    await client.v2.tweet(tweet)
+    console.log('Tweeted!')
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 let fun = async () => {
-  let tweet = 'Hello World!';
+  let fires = await getFires()
+  if (fires.length == 0) return
+  let tweet = generateTweet(fires)
+  if (!tweet) return
   try {
     await client.v2.tweet(tweet)
     console.log('Tweeted!')
@@ -79,5 +83,3 @@ let fun = async () => {
     console.log(error)
   }
 }
-
-fun();

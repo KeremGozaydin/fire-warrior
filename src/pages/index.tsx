@@ -6,13 +6,13 @@ export default function Home() {
       <main>
         <Box sx={{display: 'flex', flexFlow: 'column nowrap', gap: '3em', padding: '1em', alignItems: 'center', justifyContent: 'center'}}>
           <Typography sx={{fontSize: '1.5em'}}>
-          Konumunuza yakın orman yangınlarını görüntüleyebilmek için <span style={{fontStyle: 'italic'}}><a href='#link'>Haritaya</a></span> tıklayın.
+          Konumunuza yakın orman yangınlarını görüntüleyebilmek için <span style={{fontStyle: 'italic'}}>Haritaya</span> tıklayın.
           </Typography>
           <Typography sx={{fontSize: '1.5em'}}>
           Orman yangınları hakkındaki bilgilendirici videomuzu izlemek için aşağı kaydırın.
           </Typography>
-          <Typography sx={{fontSize: '1.5em'}}>
-          Geleceği Korumak İçin Alevlerle Savaş: Doğa ve Toplum İçin Hep Birlikte El Ele
+          <Typography sx={{fontSize: '1.5em', fontWeight: '600'}}>
+          Geleceği Korumak İçin Alevlerle Savaş: Doğa ve Toplum İçin Hep Birlikte El Ele!
           </Typography>
           <Card sx={{width: '800px', display: 'flex', flexFlow: 'column nowrap', justifyContent: 'center', alignItems: 'center',}}>
             <CardContent>
