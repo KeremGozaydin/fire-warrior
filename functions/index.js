@@ -9,6 +9,9 @@ const appKeySecret = 'vhlyjva6xQYBSNtuRrNgboqla1NiqN5lZvxVRVifKSNnHa18xv'
 const accessToken = '1268847365550673921-9FM9d8jdPbERTF7sJvIxcZ7LqBg8uc'
 const accessTokenSecret = 'mMZXDjyH77BptKOhewiAZuGeBycLGrOkn8ag8jLmpGxep'
 
+const clientId = 'eGRzdTJQa2c0ZmJCRGpieHdBeTE6MTpjaQ'
+const clientSecret = '0FK2U4S-4XKn5S09aJL7BvW5ivKHX-PfHqegm09v6kSGFuu1X6'
+
 let client = new TwitterApi({
   appKey: appKey,
   appSecret: appKeySecret,
@@ -39,7 +42,28 @@ const getFires = async () => {
   return baba
 }
 
-exports.tweet = onSchedule('every 4 hours', async () => {
+let generateTweet = (fires) => {
+  if (fires.length == 0) return console.log('No fires detected')
+  let top3 = fires.sort((a,b) => parseFloat(b.scan)*parseFloat(b.track) - parseFloat(a.scan)*parseFloat(a.track)).slice(0,3)
+  top3.map(fire => {
+    fire.scan = (parseFloat(fire.scan)*0.375).toFixed(2)
+    fire.track = (parseFloat(fire.track)*0.375).toFixed(2)
+    fire.latitude = parseFloat(fire.latitude).toFixed(2)
+    fire.longitude = parseFloat(fire.longitude).toFixed(2)
+  })
+  let tweet = 
+  `Son 4 saat içinde ${fires.length} yangın tespit edildi!
+Son 4 saatteki en büyük 3 yangın:
+1. ${top3[0].latitude}N ${top3[0].longitude}E ${top3[0].scan}km x ${top3[0].track}km
+https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@${top3[0].longitude},${top3[0].latitude},12.2z
+2. ${top3[1].latitude}N ${top3[1].longitude}E ${top3[1].scan}km x ${top3[1].track}km
+https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@${top3[1].longitude},${top3[1].latitude},12.2z
+3. ${top3[2].latitude}N ${top3[2].longitude}E ${top3[2].scan}km x ${top3[2].track}km
+https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@${top3[2].longitude},${top3[2].latitude},12.2z
+`
+}
+
+exports.tweet = onSchedule('0 */4 * *', async () => {
   let fires = await getFires()
   if (fires.length == 0) return
   let tweet = `🔥 ${fires.length} yangın tespit edildi!`

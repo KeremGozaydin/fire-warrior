@@ -10,9 +10,9 @@ export default function Home() {
           </Typography>
           <Card sx={{width: '800px', display: 'flex', flexFlow: 'column nowrap', justifyContent: 'center', alignItems: 'center',}}>
             <CardContent>
-              <Typography paddingBottom={'0.5em'} textAlign={"center"} variant="h4">Video burda</Typography>
+              <Typography paddingBottom={'0.5em'} textAlign={"center"} variant="h4">Bilgilendirme Videomuz!</Typography>
               <video controls height={400}>
-                <source src='http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' type='video/mp4' />
+                <source src='/bilgilendirme.mp4' type='video/mp4' />
               </video>
             </CardContent>
           </Card>
