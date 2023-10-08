@@ -2,27 +2,27 @@ const csv = require('csvtojson');
 const { onSchedule } = require('firebase-functions/v2/scheduler');
 const {TwitterApi} = require('twitter-api-v2');
 
-const mapKey = '3407bc83a7304ea462191a718f8cf6fa'
-
-const appKey = '4O9ShzpiJMYFNpl5qI4J95sb8'
-const appKeySecret = 'vhlyjva6xQYBSNtuRrNgboqla1NiqN5lZvxVRVifKSNnHa18xv'
-const accessToken = '1268847365550673921-9FM9d8jdPbERTF7sJvIxcZ7LqBg8uc'
-const accessTokenSecret = 'mMZXDjyH77BptKOhewiAZuGeBycLGrOkn8ag8jLmpGxep'
+const apiKey = 'kYqSlaniAnozmxXXuVjIBGt3n'
+const apiSecret = '2kYlwsgilsLtLMpB0XB290BcUCA9pIKazE99AmKLHVBsNvCg4Y'
 
 const clientId = 'eGRzdTJQa2c0ZmJCRGpieHdBeTE6MTpjaQ'
 const clientSecret = '0FK2U4S-4XKn5S09aJL7BvW5ivKHX-PfHqegm09v6kSGFuu1X6'
+const accessToken = '1710687260415299584-BppQ28yWHhOkAonQLI1ve02drPyCVB'
+const accessSecret = 'AiqDXyUd4yVW65MfLjmMWE2AP5yCALIdQ5Z6broXr9YmU'
 
 let client = new TwitterApi({
-  appKey: appKey,
-  appSecret: appKeySecret,
+  appKey: apiKey,
+  appSecret: apiSecret,
   accessToken,
-  accessSecret: accessTokenSecret,
+  accessSecret: accessSecret,
+  clientKey: clientId,
+  clientSecret: clientSecret
 })
 
 const getAvailableHours = (hour) => {
   let hours = []
   for (let i = 0; i < 24; i++) {
-    if (i >= hour - 8 || i>= hour + 16) hours.push(i)
+    if (i >= hour - 4 || i>= hour + 20) hours.push(i)
   }
   return hours
 }
@@ -70,24 +70,14 @@ exports.tweet = onSchedule('0 */4 * *', async () => {
   await client.v2.tweet(tweet)
 })
 
-getFires().then((fires) => {
-  if (fires.length == 0) return console.log('No fires detected')
-  let top3 = fires.sort((a,b) => parseFloat(b.scan)*parseFloat(b.track) - parseFloat(a.scan)*parseFloat(a.track)).slice(0,3)
-  top3.map(fire => {
-    fire.scan = (parseFloat(fire.scan)*0.375).toFixed(2)
-    fire.track = (parseFloat(fire.track)*0.375).toFixed(2)
-    fire.latitude = parseFloat(fire.latitude).toFixed(2)
-    fire.longitude = parseFloat(fire.longitude).toFixed(2)
-  })
-  let tweet = 
-  `Son 4 saat içinde ${fires.length} yangın tespit edildi!
-Son 4 saatteki en büyük 3 yangın:
-1. ${top3[0].latitude}N ${top3[0].longitude}E ${top3[0].scan}km x ${top3[0].track}km
-https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@${top3[0].longitude},${top3[0].latitude},12.2z
-2. ${top3[1].latitude}N ${top3[1].longitude}E ${top3[1].scan}km x ${top3[1].track}km
-https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@${top3[1].longitude},${top3[1].latitude},12.2z
-3. ${top3[2].latitude}N ${top3[2].longitude}E ${top3[2].scan}km x ${top3[2].track}km
-https://firms.modaps.eosdis.nasa.gov/map/#d:24hrs;@${top3[2].longitude},${top3[2].latitude},12.2z
-`
-  console.log(tweet)
-})
+let fun = async () => {
+  let tweet = 'Hello World!';
+  try {
+    await client.v2.tweet(tweet)
+    console.log('Tweeted!')
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+fun();
